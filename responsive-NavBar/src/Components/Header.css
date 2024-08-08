@@ -1,0 +1,9 @@
+.menu {
+    transition: top 2s ease;
+    top: -100%;
+}
+
+.menu.active {
+    transition: top 1s ease;
+    top: 10vh;
+}

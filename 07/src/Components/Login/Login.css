@@ -1,0 +1,19 @@
+.blurr{
+    backdrop-filter: blur(12px);
+    box-shadow: -2px -2px 10px gray,
+    inset -2px -2px 10px gray;
+}
+
+input[type="text"], input[type="password"], input[type="email"]{
+    /* background-color: aqua; */
+    background: transparent;
+    height: 2.5rem;
+    border-radius: 15px;
+    outline: none;
+    border: 1px solid white;
+    padding-left: 15px;
+}
+
+input:focus{
+    border: 1px solid green;
+}
