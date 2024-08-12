@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
 import ProductData from './Hooks/useProductData'
-import StateData from './Hooks/useStateData';
 import { ProductProvider } from './Contexts/ProductContext';
-import NavBar from './Components/Header/NavBar';
 import Cart from './Components/Cart/Cart';
 import Cardframe from './Components/Cardframe/Cardframe';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Components/Layout/Layout';
-import CreditCard from './Components/CreditCard/CreditCard';
-import CashOnDelivery from './Components/CashOnDelivery.jsx/CashOnDelivery';
 import Payment from './Components/Payment/Payment';
 import PaymentCart from './Components/PaymentCart/PaymentCart';
 
@@ -16,7 +12,7 @@ function App() {
   // const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [datas, setDatas] = useState([]);
-  const [states, setStates] = useState([]);
+  // const [states, setStates] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   // console.log(data);
   
@@ -34,7 +30,13 @@ function App() {
     
   }
 
-  const removeCart = () => {}
+  const removeCart = (id) => {
+    let arr = cart.filter((data) => {
+      if(data.id !== id)
+        return data;
+    })
+    setCart([...arr]);
+  }
 
   const handaleCount = (data, num) => {
     let index;
@@ -44,6 +46,8 @@ function App() {
     })
     cart[index].quantity += num;
     setCart([...cart]);
+    if(cart[index].quantity == 0)
+      removeCart(data.id)
   }
 
   const handaleTotalAmount = () => {
@@ -119,7 +123,6 @@ function App() {
     {
       path: "payment",
       element: <PaymentAndCart />
-      // element: <CreditCard />
     }
     ]
   }])
@@ -128,11 +131,6 @@ function App() {
     <>
       <ProductProvider value={{datas, cart, totalAmount, search, addToCart, removeCart, handaleCount, handaleTotalAmount}}>
         <div className='bg-black min-h-screen'>
-          {/* <NavBar />
-          <div className=''>
-            <Cardframe />
-            <Cart />
-          </div> */}
           <RouterProvider router={router} />
         </div>
       </ProductProvider>
